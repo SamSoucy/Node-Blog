@@ -1,6 +1,6 @@
 const express = require("express");
 
-const User = require("./userDb.js");
+
 
 const Posts = require("./postDb.js");
 
@@ -19,5 +19,6 @@ router.get('/', async (req, res) => {
       });
     }
 });
+
 
 module.exports = router;
