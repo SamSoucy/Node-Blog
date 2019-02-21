@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
       });
     }
 });
-
+//***********posts by id************************/
 router.get('/:id', async (req, res) => {
   try {
     const post = await Posts.getById(req.params.id);
@@ -35,10 +35,10 @@ router.get('/:id', async (req, res) => {
     });
   }
 });
-
+//*************add to a post*****************/
 router.post('/', async (req, res) => {
   if (!req.body.text || !req.body.user_id) {
-    res.status(400).json({ errorMessage: "Please provide text for the post." });
+    res.status(400).json({ errorMessage: "Please provide text and user_id for the post." });
   } else {
     try {
       const post = await Posts.insert(req.body);
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
     }
   }
 });
-
+//*********************delete a post**********************/
 router.delete('/:id', async (req, res) => {
   try {
     const post = await Posts.remove(req.params.id);
@@ -68,14 +68,14 @@ router.delete('/:id', async (req, res) => {
     });
   }
 });
-
+//************update a post*****************/
 router.put('/:id', async (req, res) => {
   try {
     const post = await Posts.update(req.params.id, req.body);
     if (post) {
       res.status(200).json({message: 'This post has been Updated'});
     } else if(post) {
-      res.status(400).json({ errorMessage: "Please provide title and contents for the post." });
+      res.status(400).json({ errorMessage: "Please provide text for the post." });
     } else {
       res.status(404).json({ message: "The post with the specified ID does not exist." });
     }

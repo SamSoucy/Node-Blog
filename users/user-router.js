@@ -4,6 +4,9 @@ const Users = require("./userDb.js");
 
 const router = express.Router();
 
+
+//**********to retrieve a list of users****************//
+
 router.get('/', async (req, res) => {
     try {
       const users = await Users.get(req.query);
@@ -15,7 +18,7 @@ router.get('/', async (req, res) => {
       });
     }
 });
-  
+  //***********users by id************************//
 router.get('/:id', async (req, res) => {
     try {
       const user = await Users.getUserPosts(req.params.id);
@@ -32,6 +35,8 @@ router.get('/:id', async (req, res) => {
       });
     }
 });
+
+//*************add to a users*****************//
   
 router.post('/', async (req, res) => {
     try {
@@ -49,7 +54,7 @@ router.post('/', async (req, res) => {
       });
     }
 });
-  
+  //*********************delete a user**********************//
 router.delete('/:id', async (req, res) => {
     try {
       const user = await Users.remove(req.params.id);
@@ -61,11 +66,12 @@ router.delete('/:id', async (req, res) => {
     } catch (error) {
       console.log(error);
       res.status(500).json({
-        error: "The user could not be removed" ,
+        error: "The user could not be removed"
       });
     }
 });
   
+ //************update a post*****************//
 router.put('/:id', async (req, res) => {
     try {
       const user = await Users.update(req.params.id, req.body);
