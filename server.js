@@ -15,6 +15,9 @@ server.use(helmet());
 server.use("/api/posts", postsRouter)
 server.use("/api/users", usersRouter)
 
+server.get("/", (req, res) => {
+    res.send("sam's project go to /api/users || api/posts")
+})
 
 
 function upperCase(req, res, next) {
