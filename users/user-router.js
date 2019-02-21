@@ -64,6 +64,24 @@ router.delete('/:id', async (req, res) => {
         error: "The user could not be removed" ,
       });
     }
+});
+  
+router.put('/:id', async (req, res) => {
+    try {
+      const user = await Users.update(req.params.id, req.body);
+      if (user) {
+        res.status(200).json({message: 'This user has been Updated'});
+      } else if(user) {
+        res.status(400).json({ errorMessage: "Please provide a name for the user." });
+      } else {
+        res.status(404).json({ message: "The user with the specified ID does not exist." });
+      }
+  } catch (error) {
+    console.log(error);
+      res.status(500).json({
+         error: "The user information could not be modified."
+      });
+    };
   });
   
   
