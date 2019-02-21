@@ -16,7 +16,7 @@ server.use("/api/posts", postsRouter)
 server.use("/api/users", usersRouter)
 
 server.get("/", (req, res) => {
-    res.send("sam's project go to /api/users || api/posts")
+    res.send("To view Sam's project go to /api/users || api/posts")
 })
 
 
