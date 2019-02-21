@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
   
 router.get('/:id', async (req, res) => {
     try {
-      const user = await Users.getById(req.params.id);
+      const user = await Users.getUserPosts(req.params.id);
   
       if (user.length !== 0) {
         res.status(200).json(user);
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
       if (user) {
         res.status(201).json(user);
       } else {
-        res.status(400).json({ errorMessage: "Please name for the user." });
+        res.status(400).json({ errorMessage: "Please add name for the user." });
       }
       
     }catch (error) {
