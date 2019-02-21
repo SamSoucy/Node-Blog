@@ -6,6 +6,7 @@ const Posts = require("./postDb.js");
 
 const router = express.Router();
 
+
 //**********to retrieve a list of posts****************/
 
 router.get('/', async (req, res) => {
@@ -37,5 +38,37 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.post('/', async (req, res) => {
+  try {
+    const post = await Posts.insert(req.body);
+    if (post) {
+      res.status(201).json(post);
+    } else {
+      res.status(400).json({ errorMessage: "Please provide text for the post." });
+    }
+    
+  }catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: "There was an error while saving the post to the database",
+    });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const post = await Posts.remove(req.params.id);
+    if (post > 0) {
+      res.status(200).json({ message: 'This post has been deleted' });
+    } else {
+      res.status(404).json({ message: "The post with the specified ID does not exist."  });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: "The post could not be removed" ,
+    });
+  }
+});
 
 module.exports = router;
